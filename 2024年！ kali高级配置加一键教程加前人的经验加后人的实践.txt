@@ -1,0 +1,46 @@
+2024年！ kali高级配置加一键教程加前人的经验加后人的实践
+记录一下配置kali的过程，方便下次需要直接复制粘贴
+直接终端按照顺序输入就可以配置好
+作者已踩点，请放心
+
+kali更换国内源
+sudo su 进入root 模式
+vim /etc/apt/sources.list 编辑软件源配置文件
+i 进入编辑模式，esc退出，：wq保存退出
+
+根据需要自己选一个，中科大的还可以
+
+中科大
+deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+
+kali更改语言
+sudo su
+dpkg-reconfigure locales
+使用空格键取消勾选en_US.UTF-8 UTF-8选项，一定要，不然终端是英文，而其他是中文！
+好像是空格键或者enter键勾选[[ ] zh-CN.UTF-8.UTF-8一个选项,变成[*] zh-CN.UTF-8.UTF-8
+
+kali更新
+sudo su
+apt update
+apt upgrade -y
+apt autoremove -y
+reboot
+
+kali安装中文输入法
+apt install fcitx
+apt install fcitx-googlepinyin
+reboot
+右上角小键盘切换
+
+kali安装 Google Chrome
+sudo apt install gdebi-core
+sudo gdebi google-chrome-stable_current_amd64.deb
+只需点击左上角的kali图标输入“chrome”即可搜索它。如果需要，可以右键单击该图标并将其添加到快速启动栏。
+
+其他 下载并安装 Tor 浏览器，包括签名验证
+sudo apt update
+sudo apt install -y tor torbrowser-launcher
+torbrowser-launcher
+无上外网的能力，不要用!
+作者未测试过
