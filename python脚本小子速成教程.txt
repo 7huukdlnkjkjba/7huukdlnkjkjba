@@ -1,0 +1,6 @@
+python脚本小子速成教程
+
+pycharm下载：https://www.jetbrains.com/pycharm/download/#section=windows
+下载后新建一个项目，github（girhub.com）上复制粘贴python项目。然后，是调试部分是最主要的，通过调试只言片语和搜索语法找关键词。
+
+然后去相关论坛写过程装逼。

@@ -1,0 +1,27 @@
+二进制脚本小子速成教程
+
+下载Wireshark（网络监控）
+下载Process Monitor（文件和注册表监控）
+下载一个二进制编译器，是什么？懂的都懂。
+ 
+Process Monitor（文件和注册表监控）打开观察，完。
+Wireshark打开联网观察，完。
+
+下载IDA，将 exe文件 拖曳到 IDA 的图标上，然后会显示一个 About 对话框，我们按 OK 将它关闭。
+
+接下来，会弹出一个 Load a new file 对话框，询问用什么格式打开指定的文件。
+
+这里我们选择 Portable executable for 80386 (PE)，然后按 OK。
+
+随后可能还会弹出一些消息，只要点击 OK 就可以了。
+
+接着，IDA 会弹出一个分析窗口。
+
+右边有一个名叫 Names window 的窗口，它默认是打开的，如果没有打开的话可以按 Shift+F4 打开，或者也可以点击菜单 View → Open subviews → Names。
+
+在 Names window 窗口的最上方会显示 wWinMain 这个函数名，双击它。
+
+接下来，IDA View-A 窗口中会显示出反汇编代码。
+
+
+
